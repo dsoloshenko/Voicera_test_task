@@ -1,5 +1,5 @@
 /**
- * user model
+ * meeting  model
  **/
 
 VoiceraTest.module('Models', function(Models, VoiceraTest, Backbone, Marionette, $, _) {

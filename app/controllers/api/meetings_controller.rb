@@ -25,8 +25,6 @@ class Api::MeetingsController < ApplicationController
   def update
     @meeting.update(meeting_params)
     @meeting.meeting_highlights.destroy_all
-    puts "=============================================="
-    puts highlight_params[:highlight_text]
     highlight_params[:highlight_text].split(';').each{|highlight_param| @meeting.meeting_highlights.create({highlight_text: highlight_param.strip})} unless highlight_params.blank?
     head :no_content
   end

@@ -17,6 +17,9 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
         });
         meetingsView.on('itemview:edit:meeting', function(view, meeting) {
           _this.meetingNewRegion(layout, meeting, meetingsView);
+        });
+        meetingsView.on('itemview:edit:highlight', function(view, meeting) {
+          _this.meetingNewRegion(layout, meeting, meetingsView);
         })
       });
     },

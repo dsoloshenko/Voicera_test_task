@@ -6,6 +6,6 @@ class Meeting < ActiveRecord::Base
             format: { with: /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\Z/i }
   validates_datetime :start_time
 
-  accepts_nested_attributes_for :meeting_highlights, allow_destroy: true
+  accepts_nested_attributes_for :meeting_highlights, allow_destroy: true,  reject_if: proc { |attributes| attributes['title'].blank? }
 
 end

@@ -57,9 +57,8 @@ Rails.application.routes.draw do
   root 'home#index'
 
   namespace :api do
-    resources :meetings, id: /.*/  do
-      resources :meeting_highlights
-    end
+    resources :meetings, id: /.*/
+    resources :meeting_highlights, id: /.*/
   end
 
 end

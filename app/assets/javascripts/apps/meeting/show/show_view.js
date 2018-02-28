@@ -22,7 +22,7 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
       e.preventDefault();
       var data = Backbone.Syphon.serialize(this);
       this.model.set(data);
-      this.model.set('meeting_highlights', _.map(data.highlight_text.split(';'), function(text){ return  {highlight_text: text} }));
+      this.model.set('meeting_highlights', _.map(data.highlight_text.split(';'), function(text){  if (text.length > 0) { return  {highlight_text: text} }}));
       console.log(this.model);
       this.trigger('save:meeting',  this.model);
     }
@@ -40,7 +40,7 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
       e.preventDefault();
       var data = Backbone.Syphon.serialize(this);
       this.model.set(data);
-      this.model.set('meeting_highlights', _.map(data.highlight_text.split(';'), function(text){ return  {highlight_text: text} }));
+      this.model.set('meeting_highlights', _.map(data.highlight_text.split(';'), function(text){ if (text.length > 0) { return  {highlight_text: text}; } }));
       this.trigger('edit:meeting',  this.model);
     }
 
@@ -51,17 +51,15 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
     tagName: 'tr',
     ui: {
       'update_meeting':       '.js-update-meeting',
-      'delete_meeting':       '.js-delete-meeting'
+      'delete_meeting':       '.js-delete-meeting',
+      'edit_highlight':        '.js-edit-highlight'
     },
 
     events: {
       'click':                     'highlightName',
       'click @ui.update_meeting':    'updateMeetingClicked',
-      'click @ui.delete_meeting':    'deleteMeetingClicked'
-    },
-
-    initialize: function() {
-      console.log(this);
+      'click @ui.delete_meeting':    'deleteMeetingClicked',
+      'click @ui.edit_highlight':    'editHighlightClicked'
     },
 
     highlightName: function(e){
@@ -80,6 +78,12 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
       e.stopPropagation();
       this.$el.fadeOut();
       this.trigger('delete:meeting', this.model);
+    },
+
+    editHighlightClicked: function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.trigger('edit:highlight', this.model);
     }
   });
 
