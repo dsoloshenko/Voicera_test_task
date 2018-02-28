@@ -5,6 +5,8 @@ application up and running.
 
 Things you may want to cover:
 
+Time spent for project - 4,5 hours
+
 * Ruby version - ruby 2.2.1
 * Rails version - 4.2.5.1
 * Heroku link -https://voicera-test.herokuapp.com/
