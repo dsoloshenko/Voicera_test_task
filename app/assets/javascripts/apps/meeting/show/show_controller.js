@@ -7,6 +7,7 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
   Show.Controller = {
     show: function(layout) {
       var _this = this;
+      this.layout = layout;
       var meetings = VoiceraTest.request('meetings:entity');
       meetings.on('sync', function() {
         _this.meetings_collection = new  VoiceraTest.Collections.Meetings(meetings.models);
@@ -70,7 +71,7 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
         }
         highlight.save(null, {
           success: function() {
-            _this.show();
+            _this.show(_this.layout);
           }
         });
       })

@@ -36,6 +36,16 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
       'click button.js-meeting-submit': 'submitClicked'
     },
 
+    onShow: function() {
+      $('#start_time').datetimepicker({
+        format: 'DD MMMM YYYY HH:mm',
+        date: new Date(this.model.get('start_time'))
+      });
+      $('#end_time').datetimepicker({
+        format: 'DD MMMM YYYY HH:mm',
+        date: new Date(this.model.get('end_time'))
+      });
+    },
     submitClicked: function(e) {
       e.preventDefault();
       var data = Backbone.Syphon.serialize(this);
@@ -58,8 +68,13 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
     },
 
     onShow: function() {
-      $('#start_time, #end_time').datetimepicker({
-        format: 'DD MMMM YYYY HH:mm'
+      $('#start_time').datetimepicker({
+        format: 'DD MMMM YYYY HH:mm',
+        date: new Date(this.model.get('start_time'))
+      });
+      $('#end_time').datetimepicker({
+        format: 'DD MMMM YYYY HH:mm',
+        date: new Date(this.model.get('end_time'))
       });
     },
 
