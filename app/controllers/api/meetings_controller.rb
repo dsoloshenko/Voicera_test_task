@@ -12,7 +12,7 @@ class Api::MeetingsController < ApplicationController
 # POST /meeting
   def create
     @meeting = Meeting.create!(meeting_params)
-    @highlight = highlight_params[:highlight_text].split(';').each{|highlight_param| @meeting.meeting_highlights.create({highlight_text: highlight_param})} unless highlight_params.blank?
+    @highlight = highlight_params[:highlight_text].split(';').each{|highlight_param| @meeting.meeting_highlights.create({highlight_text: highlight_param.strip})} unless highlight_params.blank?
     json_response(@meeting, :created)
   end
 
@@ -24,7 +24,10 @@ class Api::MeetingsController < ApplicationController
 # PUT /meeting/:id
   def update
     @meeting.update(meeting_params)
-    highlight_params[:highlight_text].split(';').each{|highlight_param| @meeting.meeting_highlights.update({highlight_text: highlight_param})} unless highlight_params.blank?
+    @meeting.meeting_highlights.destroy_all
+    puts "=============================================="
+    puts highlight_params[:highlight_text]
+    highlight_params[:highlight_text].split(';').each{|highlight_param| @meeting.meeting_highlights.create({highlight_text: highlight_param.strip})} unless highlight_params.blank?
     head :no_content
   end
 

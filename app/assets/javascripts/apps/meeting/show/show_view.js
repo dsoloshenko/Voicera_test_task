@@ -22,6 +22,8 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
       e.preventDefault();
       var data = Backbone.Syphon.serialize(this);
       this.model.set(data);
+      this.model.set('meeting_highlights', _.map(data.highlight_text.split(';'), function(text){ return  {highlight_text: text} }));
+      console.log(this.model);
       this.trigger('save:meeting',  this.model);
     }
 
@@ -38,6 +40,7 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
       e.preventDefault();
       var data = Backbone.Syphon.serialize(this);
       this.model.set(data);
+      this.model.set('meeting_highlights', _.map(data.highlight_text.split(';'), function(text){ return  {highlight_text: text} }));
       this.trigger('edit:meeting',  this.model);
     }
 
