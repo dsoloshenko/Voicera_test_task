@@ -1,0 +1,21 @@
+<td><%= title %></td>
+<td><%= organizer_email %></td>
+<td><%= start_time %></td>
+<td><%= end_time %></td>
+<td>
+  <ul>
+    <% _.each(meeting_highlights, function(meeting_highlight){ %>
+      <li>     <%= meeting_highlight.highlight_text %> </li>
+  <% }); %>
+  </ul>
+</td>
+<td class="text-nowrap">
+  <button  class="btn btn-small js-update-meeting">
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  </button>
+  <button class="btn btn-small js-delete-meeting">
+    <span class="glyphicon glyphicon-trash"></span>
+    Delete
+  </button>
+</td>

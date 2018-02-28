@@ -27,3 +27,8 @@
 //= require voicera_test
 //= require_tree ./apps
 //= require_tree ./entities
+
+$(document).ready(function(){
+  // Start the application after loading all the dependencies, ...
+  VoiceraTest.start();
+});

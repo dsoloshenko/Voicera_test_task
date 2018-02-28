@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module VoiceraMeetingOrganizer
+module VoiceraTest
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -22,5 +22,18 @@ module VoiceraMeetingOrganizer
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.autoload_paths += %W["#{config.root}/app/validators/"]
+    # Enable the asset pipeline
+    config.assets.enabled = true
+
+    # Version of your assets, change this if you want to expire all your assets
+    config.assets.version = '1.0'
+
+    config.assets.precompile += %w(application.js jquery.js jquery-ui.js voicera_test.js)
+
+    if defined?(HandlebarsAssets)
+      HandlebarsAssets::Config.template_namespace = 'JST'
+    end
+
   end
 end
