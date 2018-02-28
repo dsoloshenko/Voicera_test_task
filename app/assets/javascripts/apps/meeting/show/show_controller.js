@@ -18,8 +18,14 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
         meetingsView.on('itemview:edit:meeting', function(view, meeting) {
           _this.meetingNewRegion(layout, meeting, meetingsView);
         });
-        meetingsView.on('itemview:edit:highlight', function(view, meeting) {
-          _this.meetingNewRegion(layout, meeting, meetingsView);
+        meetingsView.on('itemview:edit:highlight', function(view, highlight_id) {
+          var highlight_meeting = VoiceraTest.request('highlight_meeting:entity', {id: highlight_id});
+          $.when(highlight_meeting).done(function (highlight) {
+            _this.meetingHighlightEditRegion(highlight);
+          })
+        });
+        meetingsView.on('itemview:delete:highlight', function(view, highlight_id) {
+          VoiceraTest.request('highlight_meeting:delete', {id: highlight_id});
         })
       });
     },
@@ -46,7 +52,23 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
         if (meeting.isValid(true)) {
           modal.close();
         }
-        meeting.save(null, {
+        meeting.save();
+      })
+    },
+
+    meetingHighlightEditRegion: function(highlight) {
+      var _this = this,
+        highlightEditView = this.getHighlightEditView(highlight),
+        modal = new ModalRegion({el:'#modal'});
+      modal.show(highlightEditView);
+      highlightEditView.on('modal:close', function () {
+        modal.close();
+      });
+      highlightEditView.on('edit:highlight', function(highlight) {
+        if (highlight.isValid(true)) {
+          modal.close();
+        }
+        highlight.save(null, {
           success: function() {
             _this.show();
           }
@@ -59,6 +81,9 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
     },
     getMeetingEditView: function(meeting){
       return new Show.Edit({model: meeting});
+    },
+    getHighlightEditView: function(highlight){
+      return new Show.HighlightEdit({model: highlight});
     },
     getMeetingsCollectionView: function(){
       return new Show.Collection({collection: this.meetings_collection});

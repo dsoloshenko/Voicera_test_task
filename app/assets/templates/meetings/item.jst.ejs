@@ -1,14 +1,19 @@
 <td><%= title %></td>
 <td><%= organizer_email %></td>
-<td><%= start_time.slice(0, -8).replace("T", " ") %></td>
-<td><%= end_time.slice(0, -8).replace("T", " ") %></td>
-<td>
+<td><%= formatDateTime(start_time) %></td>
+<td><%= formatDateTime(end_time) %></td>
+<td class="col-lg-4">
   <ul>
     <% _.each(meeting_highlights, function(meeting_highlight){ %>
-      <li class="mb15"> <%= meeting_highlight.highlight_text %>
-        <button class="btn btn-xs js-edit-highlight  ml20" data-id="<%= meeting_highlight.id %>">
+      <li class="mb15"> <%= meeting_highlight.highlight_text %> <br />
+      <strong> TIME:
+      <%= formatDateTime(meeting_highlight.start_time) %> - <%= formatDateTime(meeting_highlight.end_time) %>
+      </strong>
+        <button class="btn btn-xs js-edit-highlight  ml20" id="<%= meeting_highlight.id %>">
            <span class="glyphicon glyphicon-pencil"></span>
-              Edit highlight
+         </button>
+        <button class="btn btn-xs js-delete-highlight" id="<%= meeting_highlight.id %>">
+           <span  class="glyphicon glyphicon-trash"></span>
          </button>
        </li>
   <% }); %>

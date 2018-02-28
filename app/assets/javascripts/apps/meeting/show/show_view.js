@@ -46,20 +46,57 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
 
   });
 
+  Show.HighlightEdit = Marionette.ItemView.extend({
+    template: JST['meetings/highlight_edit'],
+
+    events: {
+      'click button.js-meeting-submit': 'submitClicked'
+    },
+
+    onRender: function(){
+      Backbone.Validation.bind(this);
+    },
+
+    onShow: function() {
+      $('#start_time, #end_time').datetimepicker({
+        format: 'DD MMMM YYYY HH:mm'
+      });
+    },
+
+    submitClicked: function(e) {
+      e.preventDefault();
+      var data = Backbone.Syphon.serialize(this);
+      this.model.set(data);
+      this.trigger('edit:highlight',  this.model);
+    }
+
+  });
+
   Show.Item = Marionette.ItemView.extend({
     template: JST['meetings/item'],
+
     tagName: 'tr',
     ui: {
       'update_meeting':       '.js-update-meeting',
       'delete_meeting':       '.js-delete-meeting',
-      'edit_highlight':        '.js-edit-highlight'
+      'edit_highlight':       '.js-edit-highlight',
+      'delete_highlight':     '.js-delete-highlight'
     },
 
     events: {
       'click':                     'highlightName',
       'click @ui.update_meeting':    'updateMeetingClicked',
       'click @ui.delete_meeting':    'deleteMeetingClicked',
-      'click @ui.edit_highlight':    'editHighlightClicked'
+      'click @ui.edit_highlight':    'editHighlightClicked',
+      'click @ui.delete_highlight':  'deleteHighlightClicked'
+    },
+
+    templateHelpers: {
+      formatDateTime: function(datetime){
+        if (!!datetime) {
+          return datetime.slice(0, -8).replace("T", " ");
+        }
+      }
     },
 
     highlightName: function(e){
@@ -83,7 +120,14 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
     editHighlightClicked: function(e) {
       e.preventDefault();
       e.stopPropagation();
-      this.trigger('edit:highlight', this.model);
+      this.trigger('edit:highlight', e.currentTarget.id);
+    },
+
+    deleteHighlightClicked: function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      $(e.target).closest( "li").fadeOut();
+       this.trigger('delete:highlight', e.currentTarget.id);
     }
   });
 

@@ -38,7 +38,7 @@ class Api::MeetingsController < ApplicationController
   private
 
   def meeting_params
-    params.permit(:title, :organizer_email, :start_time, :end_time, meeting_highlights_attributes: [ :highlight_text ])
+    params.permit(:title, :organizer_email, :start_time, :end_time)
   end
 
   def highlight_params
