@@ -13,9 +13,10 @@ Time spent for project - 4,5 hours
 
 For running project locally need:
 1. Pull project from github
-2. Run bundle install
-3. Run rake db:migrate
-4. Run rails s and open localhost:3000 in browser
+2. Run <tt>bundle install</tt>
+3. Run <tt>rake db:migrate</tt>
+4. Run rails s and open <tt>localhost:3000</tt> in browser
+5. Run test <tt>rake test</tt>
 
 
 Please feel free to use a different markup language if you do not plan to run

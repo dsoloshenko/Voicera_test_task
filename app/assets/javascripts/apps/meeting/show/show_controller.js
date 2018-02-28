@@ -45,7 +45,7 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
         }
         meeting_model.save(null, {
           success: function() {
-            _this.meetings_collection.add(meeting_model);
+            _this.show(_this.layout);
           }
         });
       });
