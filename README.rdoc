@@ -5,23 +5,15 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version - ruby 2.2.1
+* Rails version - 4.2.5.1
+* Heroku link -https://voicera-test.herokuapp.com/
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+For running project locally need:
+1. Pull project from github
+2. Run bundle install
+3. Run rake db:migrate
+4. Run rails s and open localhost:3000 in browser
 
 
 Please feel free to use a different markup language if you do not plan to run
