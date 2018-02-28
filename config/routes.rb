@@ -53,4 +53,13 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  root 'home#index'
+
+  namespace :api do
+    resources :meetings, id: /.*/  do
+      resources :meeting_highlights
+    end
+  end
+
 end
