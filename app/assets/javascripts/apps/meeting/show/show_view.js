@@ -14,6 +14,7 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
 
     onShow: function() {
       $('#start_time, #end_time').datetimepicker({
+        timeZone: '',
         format: 'DD MMMM YYYY HH:mm'
       });
     },
@@ -38,10 +39,12 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
 
     onShow: function() {
       $('#start_time').datetimepicker({
+        timeZone: '',
         format: 'DD MMMM YYYY HH:mm',
         date: new Date(this.model.get('start_time'))
       });
       $('#end_time').datetimepicker({
+        timeZone: '',
         format: 'DD MMMM YYYY HH:mm',
         date: new Date(this.model.get('end_time'))
       });
@@ -68,12 +71,13 @@ VoiceraTest.module('MeetingApp.Show', function(Show, VoiceraTest, Backbone, Mari
     },
 
     onShow: function() {
-      console.log(this.model);
       $('#start_time').datetimepicker({
+        timeZone: '',
         format: 'DD MMMM YYYY HH:mm',
         date: new Date(this.model.get('start_time'))
       });
       $('#end_time').datetimepicker({
+        timeZone: '',
         format: 'DD MMMM YYYY HH:mm',
         date: new Date(this.model.get('end_time'))
       });
